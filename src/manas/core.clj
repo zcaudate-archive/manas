@@ -81,9 +81,14 @@
 
 (defn create-table [env table columns]
   (with-connection (->subname env)
-    (l/create (->table table columns))))
+    (try (l/create (->table table columns))
+         true
+         (catch SQLException e
+           false))))
 
 (defn drop-table [env table]
   (with-connection (->subname env)
-    (l/drop (schema/table name))))
-
+    (try (l/drop (schema/table table))
+         true
+         (catch SQLException e
+           false))))
