@@ -1,6 +1,7 @@
 (ns manas.test-core
-  (require [midje.sweet :refer :all]
-           [manas.core :refer :all]))
+  (:require [midje.sweet :refer :all]
+           [manas.core :refer :all]
+           [env.core :refer [env]]))
 
 (fact "->table-entry"
   (->table-entry ["HELLO"  [:varchar 15]])
@@ -14,3 +15,6 @@
   => (lobos.schema/table :HELLO
                          (lobos.schema/varchar :EMAIL 50)
                          (lobos.schema/varchar :NAME 50)))
+
+(fact "has-connection?"
+  (has-connection? (env :conn)) => true)
