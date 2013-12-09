@@ -1,7 +1,7 @@
 (ns manas.test-core
   (:require [midje.sweet :refer :all]
            [manas.core :refer :all]
-           [env.core :refer [env]]))
+           [environ.core :refer [env]]))
 
 (fact "->table-entry"
   (->table-entry ["HELLO"  [:varchar 15]])
