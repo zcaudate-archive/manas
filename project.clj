@@ -8,4 +8,4 @@
                  [mysql/mysql-connector-java "5.1.25"]
                  [lobos "1.0.0-beta1" :exclusions [org.clojure/java.jdbc]]]
   :profiles {:dev {:dependencies [[midje "1.6.0"]]
-                   :plugins [[lein-midje "3.1.3"]}})
+                   :plugins [[lein-midje "3.1.3"]]}})

@@ -54,6 +54,8 @@
                  (false)
                  (str "drop database " (or schema (:database env)))))
 
+(defn keywordize [x]
+  (if (keyword? x) x (keyword x)))
 
 (defn ->table-entry [[k [t & args]]]
   (concat [(symbol (str "lobos.schema/" (name t))) (keyword (name k))] args))
@@ -73,11 +75,11 @@
 
 (defn all-columns [env table]
   (with-connection (->subname env)
-    (-> (analyze-schema) :tables table :columns keys)))
+    (-> (analyze-schema) :tables (get (keywordize table)) :columns keys)))
 
 (defn has-table? [env table]
   (with-connection (->subname env)
-    (-> (analyze-schema) :tables table nil? not)))
+    (-> (analyze-schema) :tables (get (keywordize table)) nil? not)))
 
 (defn create-table [env table columns]
   (with-connection (->subname env)
